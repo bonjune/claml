@@ -363,6 +363,11 @@ WRAPPER_PTR_OPTION(clang_for_stmt_get_init, Stmt, ForStmt, Stmt, getInit)
 WRAPPER_PTR_OPTION(clang_for_stmt_get_condition_variable, Stmt, ForStmt,
                    VarDecl, getConditionVariable)
 
+WRAPPER_PTR(clang_for_range_stmt_get_init, Stmt, CXXForRangeStmt, Stmt, getInit)
+WRAPPER_PTR(clang_for_range_stmt_get_cond, Stmt, CXXForRangeStmt, Expr, getCond)
+WRAPPER_PTR(clang_for_range_stmt_get_inc, Stmt, CXXForRangeStmt, Expr, getInc)
+WRAPPER_PTR(clang_for_range_stmt_get_body, Stmt, CXXForRangeStmt, Stmt, getBody)
+
 WRAPPER_PTR(clang_designated_init_expr_get_init, Stmt, DesignatedInitExpr, Expr,
             getInit)
 
