@@ -525,6 +525,13 @@ module type VA_ARG_EXPR = sig
   val get_sub_expr : t -> t
 end
 
+module type LAMBDA_EXPR = sig
+  include EXPR
+  module Stmt : STMT
+
+  val get_body : t -> Stmt.t
+end
+
 (* Type *)
 
 module type BUILTIN_TYPE = sig

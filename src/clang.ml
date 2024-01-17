@@ -1047,6 +1047,16 @@ and VAArgExpr :
       QualType.pp (get_type s)
 end
 
+and LambdaExpr :
+  (Sig.LAMBDA_EXPR with type t = Expr.t and type Stmt.t = Stmt.t) = struct
+  include Expr
+  module Stmt = Stmt
+
+  external get_body : t -> Stmt.t = "clang_lambda_expr_get_body"
+
+  let pp fmt s = F.fprintf fmt "%a" Stmt.pp (get_body s)
+end
+
 and LabelStmt : (Sig.LABEL_STMT with type t = Stmt.t and type Stmt.t = Stmt.t) =
 struct
   include Stmt
