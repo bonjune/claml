@@ -539,6 +539,13 @@ module type CXX_CONSTRUCT_EXPR = sig
   val get_args : t -> Expr.t list
 end
 
+module type MATERIALIZE_TEMPORARY_EXPR = sig
+  include EXPR
+  module Expr : EXPR
+
+  val get_sub_expr : t -> Expr.t
+end
+
 (* Type *)
 
 module type BUILTIN_TYPE = sig

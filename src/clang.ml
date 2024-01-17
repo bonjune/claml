@@ -1067,6 +1067,18 @@ struct
   external get_args : t -> Expr.t list = "clang_cxx_construct_expr_get_args"
 end
 
+and MaterializeTemporaryExpr :
+  (Sig.MATERIALIZE_TEMPORARY_EXPR with type t = Expr.t and type Expr.t = Expr.t) =
+struct
+  include Expr
+  module Expr = Expr
+
+  external get_sub_expr : t -> Expr.t
+    = "clang_materialize_temporary_expr_get_sub_expr"
+
+  let pp fmt s = F.fprintf fmt "%a" Expr.pp (get_sub_expr s)
+end
+
 and LabelStmt : (Sig.LABEL_STMT with type t = Stmt.t and type Stmt.t = Stmt.t) =
 struct
   include Stmt
