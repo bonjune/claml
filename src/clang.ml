@@ -1057,6 +1057,16 @@ and LambdaExpr :
   let pp fmt s = F.fprintf fmt "%a" Stmt.pp (get_body s)
 end
 
+and CXXConstructExpr :
+  (Sig.CXX_CONSTRUCT_EXPR with type t = Expr.t and type Expr.t = Expr.t) =
+struct
+  include Expr
+  module Stmt = Stmt
+  module Expr = Expr
+
+  external get_args : t -> Expr.t list = "clang_cxx_construct_expr_get_args"
+end
+
 and LabelStmt : (Sig.LABEL_STMT with type t = Stmt.t and type Stmt.t = Stmt.t) =
 struct
   include Stmt

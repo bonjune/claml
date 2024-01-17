@@ -624,6 +624,9 @@ WRAPPER_PTR(clang_va_arg_expr_get_sub_expr, Stmt, VAArgExpr, Expr, getSubExpr)
 
 WRAPPER_PTR(clang_lambda_expr_get_body, Expr, LambdaExpr, Stmt, getBody)
 
+WRAPPER_LIST_WITH_ITER(clang_cxx_construct_expr_get_args, CXXConstructExpr,
+                       Expr, arg_begin, arg_end)
+
 WRAPPER_BOOL(clang_init_list_expr_is_syntactic_form, InitListExpr,
              isSyntacticForm)
 WRAPPER_BOOL(clang_init_list_expr_is_semantic_form, InitListExpr,

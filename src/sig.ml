@@ -532,6 +532,13 @@ module type LAMBDA_EXPR = sig
   val get_body : t -> Stmt.t
 end
 
+module type CXX_CONSTRUCT_EXPR = sig
+  include EXPR
+  module Expr : EXPR
+
+  val get_args : t -> Expr.t list
+end
+
 (* Type *)
 
 module type BUILTIN_TYPE = sig
