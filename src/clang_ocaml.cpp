@@ -335,6 +335,26 @@ value clang_vardecl_get_init(value VarDecl) {
   }
 }
 
+value clang_stmt_children(value Stmt) {
+  CAMLparam1(Stmt);
+  CAMLlocal2(Hd, Tl);
+  LOG(__FUNCTION__);
+
+  clang::Stmt *S = *((clang::Stmt **)Data_abstract_val(Stmt));
+
+  Tl = Val_int(0);
+  for (auto child = S->child_begin(); child != S->child_end(); child++) {
+    Hd = caml_alloc(1, Abstract_tag);
+    *((clang::Stmt **)Data_abstract_val(Hd)) = *child;
+    value Tmp = caml_alloc(2, 0);
+    Store_field(Tmp, 0, Hd);
+    Store_field(Tmp, 1, Tl);
+    Tl = Tmp;
+  }
+
+  CAMLreturn(Tl);
+}
+
 WRAPPER_PTR(clang_goto_stmt_get_label, Stmt, GotoStmt, LabelDecl, getLabel)
 
 WRAPPER_PTR_OPTION(clang_if_stmt_get_init, Stmt, IfStmt, Stmt, getInit)

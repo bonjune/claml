@@ -334,6 +334,7 @@ and Stmt : (Sig.STMT with type SourceLocation.t = SourceLocation.t) = struct
   external get_source_location : t -> SourceLocation.t option
     = "clang_stmt_get_source_location"
 
+  external children : t -> t list = "clang_stmt_children"
   external is_expr : t -> bool = "clang_stmt_is_expr"
 
   let pp_loc fmt decl =
