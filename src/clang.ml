@@ -1099,6 +1099,25 @@ struct
     F.fprintf fmt "do %a while(%a)" Stmt.pp (get_body d) Stmt.pp (get_cond d)
 end
 
+and CXXForRangeStmt :
+  (Sig.CXX_FOR_RANGE_STMT
+    with type t = Stmt.t
+     and type Expr.t = Expr.t
+     and type Stmt.t = Stmt.t) = struct
+  include Stmt
+  module Expr = Expr
+  module Stmt = Stmt
+  module VarDecl = VarDecl
+
+  external get_cond : t -> Expr.t option = "clang_for_range_stmt_get_cond"
+  external get_inc : t -> Expr.t option = "clang_for_range_stmt_get_inc"
+  external get_body : t -> Stmt.t = "clang_for_range_stmt_get_body"
+  external get_init : t -> Stmt.t option = "clang_for_range_stmt_get_init"
+
+  (* TODO *)
+  let pp fmt d = F.fprintf fmt "for"
+end
+
 and ForStmt :
   (Sig.FOR_STMT
     with type t = Stmt.t

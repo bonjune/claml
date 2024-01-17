@@ -383,6 +383,17 @@ module type DO_STMT = sig
   val get_body : t -> Stmt.t
 end
 
+module type CXX_FOR_RANGE_STMT = sig
+  include STMT
+  module Stmt : STMT
+  module Expr : EXPR
+
+  val get_cond : t -> Expr.t option
+  val get_inc : t -> Expr.t option
+  val get_body : t -> Stmt.t
+  val get_init : t -> Stmt.t option
+end
+
 module type FOR_STMT = sig
   include STMT
   module Stmt : STMT
