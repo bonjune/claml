@@ -100,6 +100,7 @@ module type STMT = sig
   val get_kind : t -> kind
   val get_kind_name : t -> string
   val get_source_location : t -> SourceLocation.t option
+  val children : t -> t list
   val is_expr : t -> bool
 end
 
